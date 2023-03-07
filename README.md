@@ -13,3 +13,7 @@ Exifの情報を元画像が持っている場合は表に表示します。
 リンク先のオリジナルのサイズの画像からはExifを削除しています。
 サムネイルとしてWebPとJpegを生成してブラウザごとに出し分けを行います。
 利用するサイトに合わせてCSSはカスタマイズしてください。
+
+
+## sample
+<a href="https://blog.ast.moe/gallery/">blog.ast.moe/gallery/</a>
