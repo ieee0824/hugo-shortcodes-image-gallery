@@ -1,0 +1,30 @@
+.img-view{
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(3, auto);
+    grid-row-gap: 0;
+    grid-column-gap: 10px;
+    justify-content: start;
+    align-content: start;
+
+    .thumb-img {
+        position: relative;
+        p {
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 0;
+            right: 0;
+            display: none;
+            color: rgb(45, 45, 45);
+            background-color: rgba(173, 173, 173, 0.582);
+            font-size: large;
+        }
+        &:hover > p {
+            display: block;
+        }
+    }
+}
+
+.exif_tags{
+    font-size: small;
+}

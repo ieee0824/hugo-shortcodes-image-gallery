@@ -1,0 +1,97 @@
+{{ $size := "230x230" }}
+{{ $mobileSize := "100x100"}}
+
+<div class="img-view">
+    {{ range $idx, $src := .Params }}
+        {{ $image := resources.Get $src }}
+        {{ $rawJpeg := $image.Fit (printf "%dx%d jpeg q100" $image.Width $image.Height )}}
+
+        <div>
+            <a href="{{ $rawJpeg.RelPermalink }}" target="_blank">
+                <div class="thumb-img">
+                    <picture class="pc">
+                        {{ $pcThumbWebp := $image.Fit (printf "%s webp q90" $size )}}
+                        {{ $pcThumbJpeg := $image.Fit (printf "%s jpeg q90" $size )}}
+                        <source srcset="{{ $pcThumbWebp.RelPermalink }}" type="image/webp" >
+                        <img loading="lazy" src="{{ $pcThumbJpeg.RelPermalink }}" alt="{{ $src }}" width="{{ $pcThumbJpeg.Width }}" height="{{ $pcThumbJpeg.Height }}" />
+                    </picture>
+                    <picture class="sp">
+                        {{ $spThumbWebp := $image.Fit (printf "%s webp q90" $mobileSize )}}
+                        {{ $spThumbJpeg := $image.Fit (printf "%s jpeg q90" $mobileSize )}}
+                        <source srcset="{{ $spThumbWebp.RelPermalink }}" type="image/webp">
+                        <img loading="lazy" src="{{ $spThumbJpeg.RelPermalink }}" alt="{{ $src }}" width="{{ $spThumbJpeg.Width }}" height="{{ $spThumbJpeg.Height }}" />
+                    </picture>
+                    <p class="pc">クリックで拡大</p>
+                </div>
+            </a>
+            <div>
+                {{ if $image.Exif }}
+                    <div class="exif_tags">
+                        {{ with $image.Exif }}
+                            {{ if .Tags.Model}}
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Camera</td>
+                                            <td>{{ .Tags.Model }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lens</td>
+                                            <td>{{ .Tags.LensModel }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ISO</td>
+                                            <td>{{ .Tags.ISOSpeedRatings }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SS</td>
+                                            <td>{{ .Tags.ExposureTime }} sec</td>
+                                        </tr>
+                                        <tr>
+                                            <td>fn</td>
+                                            <td>F/{{ .Tags.FNumber }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>fl</td>
+                                            <td>{{ .Tags.FocalLength }} mm</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            {{else }}
+                                <table>
+                                    <thead>info</thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Camera</td>
+                                            <td>no data</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lens</td>
+                                            <td>no data</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ISO</td>
+                                            <td>no data</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SS</td>
+                                            <td>no data</td>
+                                        </tr>
+                                        <tr>
+                                            <td>fn</td>
+                                            <td>no data</td>
+                                        </tr>
+                                        <tr>
+                                            <td>fl</td>
+                                            <td>no data</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            {{ end}}
+                        {{ end}}
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    {{ end }}
+</div>
