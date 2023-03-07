@@ -14,6 +14,15 @@ Exifの情報を元画像が持っている場合は表に表示します。
 サムネイルとしてWebPとJpegを生成してブラウザごとに出し分けを行います。  
 利用するサイトに合わせてCSSはカスタマイズしてください。
 
+## example
+```html
+{{< gallery
+"/image/1.jpg"
+"/image/2.jpg"
+"/image/3.jpg"
+...
+>}}
+```
 
-## sample
+## sample page
 <a href="https://blog.ast.moe/gallery/">blog.ast.moe/gallery/</a>
